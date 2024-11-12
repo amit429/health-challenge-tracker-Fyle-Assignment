@@ -1,0 +1,14 @@
+<span class="p-input-icon-left w-full sm:w-64 md:w-72">
+    <!-- Search Icon -->
+    <i class="pi pi-search text-blue-500"></i>
+    <!-- Input Field -->
+    <input
+      type="search"
+      name="search"
+      [formControl]="formControl"
+      (keydown)="onSearch()"
+      pInputText
+      [placeholder]="placeholder"
+      class="p-3 pl-8 w-full border-2 border-blue-500 rounded-md"
+    />
+  </span>

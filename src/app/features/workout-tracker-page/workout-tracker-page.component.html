@@ -1,0 +1,15 @@
+<div class="flex justify-center items-center mb-4 space-x-4 p-5">
+    <app-search-bar 
+        [placeholder]="'Search for a user...'"
+        (searchSubmit)="onSearch($event)"
+        [searchValue]="searchValue"
+    ></app-search-bar>
+
+    <app-filter-dropdown
+        (filterChange)="onFilterChange($event)"
+    ></app-filter-dropdown>
+
+    <app-workout-dialog-form
+        (workoutAdded)="onWorkoutSubmit($event)"
+    ></app-workout-dialog-form>
+</div>
