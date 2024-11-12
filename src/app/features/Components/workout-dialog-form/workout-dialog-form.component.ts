@@ -54,7 +54,7 @@ export class WorkoutDialogFormComponent {
   addWorkout() {
     if (this.name && this.workoutType && this.workoutMinutes) {
       const workout: Workout = {
-        type: this.workoutType,
+        type: this.workoutType.value,
         minutes: this.workoutMinutes,
       };
       this.workoutAdded.emit({ name: this.name, workout });
