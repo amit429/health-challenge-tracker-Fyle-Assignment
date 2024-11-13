@@ -1,1 +1,7 @@
-<p>workout-dashboard-page works!</p>
+<h2 class="text-4xl text-nowrap text-center font-semibold mb-4 mt-5">🏋️ Progress Tracker Dashboard 🏋️</h2>
+<app-workout-dashboard-graph-view
+    [uniqueWorkoutTypes]="uniqueWorkoutTypes"
+    [workoutMinutes]="workoutMinutes"
+    [users]="users"
+    (selectedUserChange)="onSelectUser($event)"
+></app-workout-dashboard-graph-view>
