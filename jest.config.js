@@ -10,12 +10,12 @@ module.exports = {
     '\\.(css|less|scss)$': 'identity-obj-proxy',
   },
   testEnvironment: 'jsdom',
-  globals: {
-    'ts-jest': {
-      tsconfig: '<rootDir>/tsconfig.spec.json',
-      stringifyContentPathRegex: '\\.html$',
-    },
-  },
+  // globals: {
+  //   'ts-jest': {
+  //     tsconfig: '<rootDir>/tsconfig.spec.json',
+  //     stringifyContentPathRegex: '\\.html$',
+  //   },
+  // },
   transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
   coverageDirectory: 'coverage',
   collectCoverageFrom: [

@@ -23,6 +23,12 @@ import { User } from '../../../core/models/user.model';
   styleUrl: './workout-dialog-form.component.css',
 })
 export class WorkoutDialogFormComponent {
+
+  @Output() workoutAdded = new EventEmitter<{
+    name: string;
+    workout: Workout;
+  }>();
+
   workoutTypes = [
     { label: 'Running', value: 'Running' },
     { label: 'Cycling', value: 'Cycling' },
@@ -31,15 +37,14 @@ export class WorkoutDialogFormComponent {
   ];
 
   name: string = '';
+  
   workoutType: any = null;
+  
   workoutMinutes: number | null = null;
-  users: User[] = [];
-  displayDialog: boolean = false;
 
-  @Output() workoutAdded = new EventEmitter<{
-    name: string;
-    workout: Workout;
-  }>();
+  users: User[] = [];
+  
+  displayDialog: boolean = false;
 
   constructor(private messageService: MessageService) {}
 

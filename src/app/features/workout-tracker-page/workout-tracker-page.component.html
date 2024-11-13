@@ -17,4 +17,5 @@
 
 <app-workout-table-view
     [tableData]="tableData"
+    (selectedUser)="onRowSelect($event)"
 ></app-workout-table-view>

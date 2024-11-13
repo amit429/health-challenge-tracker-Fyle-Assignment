@@ -16,15 +16,15 @@
       <!-- Table Columns -->
       <ng-template pTemplate="header">
         <tr class="bg-blue-200 text-blue-900">
-          <th class="p-3 border border-gray-300 font-medium" style="width:25%">Name</th>
-          <th class="p-3 border border-gray-300 font-medium" style="width:25%">Workouts</th>
-          <th class="p-3 border border-gray-300 font-medium" style="width:25%">Number of Workouts</th>
-          <th class="p-3 border border-gray-300 font-medium" style="width:25%">Total Minutes</th>
+          <th class="p-3 border border-gray-300 font-bold text-center" style="width:25%">Name</th>
+          <th class="p-3 border border-gray-300 font-bold text-center" style="width:25%">Workouts</th>
+          <th class="p-3 border border-gray-300 font-bold text-center" style="width:25%">Number of Workouts</th>
+          <th class="p-3 border border-gray-300 font-bold text-center" style="width:25%">Total Minutes</th>
         </tr>
       </ng-template>
   
       <ng-template pTemplate="body" let-rowData>
-        <tr class="hover:bg-blue-50">
+        <tr class="hover:bg-blue-50 cursor-pointer" (click)="onRowSelect(rowData)">
           <td class="p-3 border border-gray-300 text-center">{{ rowData.name }}</td>
           <td class="p-3 border border-gray-300 text-center">{{ rowData.workouts }}</td>
           <td class="p-3 border border-gray-300 text-center">{{ rowData.numberOfWorkouts }}</td>
