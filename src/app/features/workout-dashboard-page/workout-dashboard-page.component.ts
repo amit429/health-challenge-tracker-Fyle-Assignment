@@ -7,7 +7,6 @@ import { User, Workout } from '../../core/models/user.model';
   selector: 'app-workout-dashboard-page',
   standalone: true,
   imports: [WorkoutDashboardGraphViewComponent],
-  providers: [WorkoutService],
   templateUrl: './workout-dashboard-page.component.html',
   styleUrl: './workout-dashboard-page.component.css'
 })
@@ -20,15 +19,11 @@ export class WorkoutDashboardPageComponent implements OnInit {
 
   constructor(private workoutService : WorkoutService) { }
 
-  ngOnInit(): void {
-    this.loadUsers();
-  }
-
-  loadUsers() {
+  loadUsers(): void {
     this.users = this.workoutService.getUsers();
   }
 
-  onSelectUser(user : User) {
+  onSelectUser(user : User): void {
     this.selectedUser = user;
     this.updateChartData(user.workouts);
   }
@@ -40,6 +35,10 @@ export class WorkoutDashboardPageComponent implements OnInit {
     );
     this.uniqueWorkoutTypes = uniqueWorkoutTypes;
     this.workoutMinutes = workoutMinutes;
+  }
+
+  ngOnInit(): void {
+    this.loadUsers();
   }
 
 }

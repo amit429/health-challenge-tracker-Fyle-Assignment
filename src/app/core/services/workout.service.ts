@@ -40,16 +40,12 @@ export class WorkoutService {
       users.push(newUser);
     }
     this.saveUsers(users);
-
-    console.log(this.getUsers());
   }
 
   //Fetch users for the table
   getUsersForTable(): TableData[] {
     const users = this.getUsers();
-    console.log(users);
     return users.map(user => {
-      console.log(user);
       return {
         name: user.name,
         workouts:  Array.from(new Set(user.workouts.map(workout => workout.type))).join(', '),

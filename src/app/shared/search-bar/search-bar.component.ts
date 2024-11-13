@@ -23,7 +23,6 @@ export class SearchBarComponent implements OnInit{
   @Input() placeholder: string = "Search for Users";
   
   onSearch() {
-    console.log(this.formControl.value);
     this.searchSubmit.emit(this.formControl.value);
   }
   

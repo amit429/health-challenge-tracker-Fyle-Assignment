@@ -27,18 +27,17 @@ export class WorkoutTrackerPageComponent implements OnInit {
   }
   
   onFilterChange(workoutType: any) {
-    this.workoutType = workoutType.value;
-    console.log(this.workoutType);
-    this.filterAndSearchTableData();
+    if (workoutType && workoutType.value) {
+      this.workoutType = workoutType.value;
+      this.filterAndSearchTableData();
+    }
     
   }
   
   onSearch(searchValue: string) {
     this.searchValue = searchValue;
-    console.log(this.searchValue);
     const users = this.workoutService.getUsers();
     users.filter(user => user.name.toLowerCase().includes(this.searchValue.toLowerCase()));
-    console.log(users);
     this.filterAndSearchTableData();
   }
 
@@ -57,18 +56,14 @@ export class WorkoutTrackerPageComponent implements OnInit {
           totalMinutes: user.workouts.reduce((acc, workout) => acc + workout.minutes, 0)
         };
       });
-
-      console.log(this.tableData);
   }
   
   onWorkoutSubmit(data: {name: string; workout: Workout}) {
-    console.log(data);
     this.workoutService.addorUpdateUser(data.name, data.workout);
     this.filterAndSearchTableData();
   }
 
   getTableData() {
     this.tableData = this.workoutService.getUsersForTable();
-    console.log(this.tableData);
   }
 }

@@ -14,7 +14,6 @@ describe('WorkoutDashboardGraphViewComponent', () => {
     
     fixture = TestBed.createComponent(WorkoutDashboardGraphViewComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
