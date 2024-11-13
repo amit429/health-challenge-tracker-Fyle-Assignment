@@ -4,11 +4,12 @@ import { FilterDropdownComponent } from "../../shared/filter-dropdown/filter-dro
 import { WorkoutDialogFormComponent } from "../Components/workout-dialog-form/workout-dialog-form.component";
 import { TableData, Workout } from '../../core/models/user.model';
 import { WorkoutService } from '../../core/services/workout.service';
+import { WorkoutTableViewComponent } from "../Components/workout-table-view/workout-table-view.component";
 
 @Component({
   selector: 'app-workout-tracker-page',
   standalone: true,
-  imports: [SearchBarComponent, FilterDropdownComponent, WorkoutDialogFormComponent],
+  imports: [SearchBarComponent, FilterDropdownComponent, WorkoutDialogFormComponent, WorkoutTableViewComponent],
   providers: [WorkoutService],
   templateUrl: './workout-tracker-page.component.html',
   styleUrl: './workout-tracker-page.component.css'
@@ -16,7 +17,7 @@ import { WorkoutService } from '../../core/services/workout.service';
 export class WorkoutTrackerPageComponent implements OnInit {
   
   searchValue: string = '';
-  workoutType: any = null;
+  workoutType: string = '';
   tableData: TableData[] = [];
 
   constructor(private workoutService: WorkoutService) {}
@@ -26,20 +27,23 @@ export class WorkoutTrackerPageComponent implements OnInit {
   }
   
   onFilterChange(workoutType: any) {
-    this.workoutType = workoutType;
+    this.workoutType = workoutType.value;
     console.log(this.workoutType);
     this.filterAndSearchTableData();
+    
   }
   
   onSearch(searchValue: string) {
     this.searchValue = searchValue;
     console.log(this.searchValue);
+    const users = this.workoutService.getUsers();
+    users.filter(user => user.name.toLowerCase().includes(this.searchValue.toLowerCase()));
+    console.log(users);
     this.filterAndSearchTableData();
   }
 
   filterAndSearchTableData() {
     const users = this.workoutService.getUsers();
-
     this.tableData = users
       .filter(user => 
         (!this.workoutType || user.workouts.some(workout => workout.type === this.workoutType)) &&
