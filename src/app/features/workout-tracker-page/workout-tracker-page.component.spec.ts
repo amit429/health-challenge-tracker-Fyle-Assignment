@@ -142,4 +142,45 @@ describe('WorkoutTrackerPageComponent', () => {
       }
     ]);
   });
+
+  it('should process selected row data correctly in onRowSelect', () => {
+    const users = [
+      {
+        id: 1,
+        name: 'John',
+        workouts: [
+          { type: 'Cardio', minutes: 30 },
+          { type: 'Cardio', minutes: 20 },
+          { type: 'Strength', minutes: 45 }
+        ]
+      }
+    ];
+    workoutService.getUsers.mockReturnValue(users);
+
+    const data: TableData = { name: 'John', workouts: 'Cardio, Strength', numberOfWorkouts: 2, totalMinutes: 95 };
+    component.onRowSelect(data);
+
+    expect(component.userWorkoutData).toEqual({
+      id: 1,
+      name: 'John',
+      workouts: [
+        { type: 'Cardio', minutes: 50 },
+        { type: 'Strength', minutes: 45 }
+      ]
+    });
+    expect(component.userDataDialogDisplay).toBe(false);
+    setTimeout(() => {
+      expect(component.userDataDialogDisplay).toBe(true);
+    },0);
+  });
+
+  it('should set userWorkoutData to null if user not found in onRowSelect', () => {
+    workoutService.getUsers.mockReturnValue([]);
+
+    const data: TableData = { name: 'John', workouts: 'Cardio, Strength', numberOfWorkouts: 2, totalMinutes: 95 };
+    component.onRowSelect(data);
+
+    expect(component.userWorkoutData).toBeNull();
+  });
+
 });

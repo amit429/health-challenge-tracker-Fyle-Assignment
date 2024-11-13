@@ -29,7 +29,7 @@ export class WorkoutTableViewComponent implements OnChanges {
     }
   }
 
-  onRowSelect(event: any) {
+  onRowSelect(event: TableData) {
     this.selectedUser.emit(event);
   }
 }

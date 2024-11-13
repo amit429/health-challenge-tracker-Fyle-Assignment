@@ -5,6 +5,7 @@ import { WorkoutDialogFormComponent } from '../Components/workout-dialog-form/wo
 import { TableData, User, Workout } from '../../core/models/user.model';
 import { WorkoutService } from '../../core/services/workout.service';
 import { WorkoutTableViewComponent } from '../Components/workout-table-view/workout-table-view.component';
+import { WorkoutUserDialogViewComponent } from '../Components/workout-user-dialog-view/workout-user-dialog-view.component';
 
 @Component({
   selector: 'app-workout-tracker-page',
@@ -14,6 +15,7 @@ import { WorkoutTableViewComponent } from '../Components/workout-table-view/work
     FilterDropdownComponent,
     WorkoutDialogFormComponent,
     WorkoutTableViewComponent,
+    WorkoutUserDialogViewComponent,
   ],
   templateUrl: './workout-tracker-page.component.html',
   styleUrl: './workout-tracker-page.component.css',
@@ -23,6 +25,7 @@ export class WorkoutTrackerPageComponent implements OnInit {
   workoutType: string = '';
   tableData: TableData[] = [];
   userWorkoutData: User | null = null;
+  userDataDialogDisplay: boolean = false;
 
   constructor(private workoutService: WorkoutService) {}
 
@@ -86,38 +89,38 @@ export class WorkoutTrackerPageComponent implements OnInit {
     const user = this.workoutService
       .getUsers()
       .find((user) => user.name === data.name);
-  
+
     if (user) {
       console.log('User:', user);
       const uniqueWorkouts = user.workouts.reduce((acc, workout) => {
-        // Find if the workout type already exists in the accumulator
         const existingWorkout = acc.find((item) => item.type === workout.type);
-  
+
         if (existingWorkout) {
-          // If it exists, add the minutes to the total
           existingWorkout.minutes += workout.minutes;
         } else {
-          // If it doesn't exist, add it as a new unique workout
           acc.push({
             type: workout.type,
-            minutes: workout.minutes,  // Changed from totalMinutes to minutes
+            minutes: workout.minutes,
           });
         }
-  
+
         return acc;
-      }, [] as { type: string; minutes: number }[]);  // Changed totalMinutes to minutes
-  
+      }, [] as { type: string; minutes: number }[]);
+
       const userDetails = {
         id: user.id,
         name: user.name,
         workouts: uniqueWorkouts,
       };
-      
+
       this.userWorkoutData = userDetails;
+      this.userDataDialogDisplay = false;
+      setTimeout(() => {
+        this.userDataDialogDisplay = true;
+      }, 0);
       console.log('User Details:', userDetails);
     } else {
       this.userWorkoutData = null;
     }
   }
-  
 }

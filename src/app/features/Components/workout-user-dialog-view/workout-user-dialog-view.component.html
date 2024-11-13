@@ -1,0 +1,64 @@
+<p-dialog
+  [(visible)]="dialogDisplay"
+  [modal]="true"
+  [responsive]="true"
+  [style]="{ width: '30rem', height: 'auto', overflow: 'auto' }"
+  class="max-w-md mx-auto -mt-5 p-6 bg-white rounded-lg"
+>
+
+  <!-- Profile Avatar and Name in Vertical Center -->
+  <div class="flex flex-col items-center justify-center space-y-2 mb-6 ">
+    <!-- Avatar -->
+    <p-avatar
+      label="{{ userWorkoutData?.name?.charAt(0) ?? '?' }}"
+      styleClass="bg-blue-500 text-white font-bold"
+      shape="circle"
+      size="xlarge"
+    >
+    </p-avatar>
+    <!-- Name under Avatar -->
+    <h2 class="text-2xl font-semibold text-gray-700 mt-2">
+      {{ userWorkoutData?.name || "User" }}
+    </h2>
+  </div>
+
+  <!-- Centered Workout Details Heading -->
+  <h2 class="text-center text-xl font-bold text-gray-800 mb-4">
+    Workout Details
+  </h2>
+
+  <!-- Styled Workout Table with Grid Lines -->
+  <div class="overflow-x-auto">
+    <table
+      class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md"
+    >
+      <thead class="bg-blue-500 text-white">
+        <tr>
+          <th
+            class="px-4 py-2 text-left font-semibold text-sm border border-gray-300"
+          >
+            Workout Name
+          </th>
+          <th
+            class="px-4 py-2 text-left font-semibold text-sm border border-gray-300"
+          >
+            Minutes
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let workout of userWorkoutData?.workouts"
+          class="border-b border-gray-200 hover:bg-blue-50 transition duration-150"
+        >
+          <td class="px-4 py-3 text-gray-700 border border-gray-300">
+            {{ workout.type }}
+          </td>
+          <td class="px-4 py-3 text-gray-700 border border-gray-300">
+            {{ workout.minutes }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</p-dialog>
