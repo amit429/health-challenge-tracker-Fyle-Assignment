@@ -9,8 +9,13 @@ export class LocalStorageService {
 
   getItem<T>(key: string): T | null {
     const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
+    try {
+      return item ? JSON.parse(item) : null;
+    } catch (e) {
+      return null; // Return null if JSON parsing fails
+    }
   }
+  
 
   setItem<T>(key: string, value: T): void {
     localStorage.setItem(key, JSON.stringify(value));

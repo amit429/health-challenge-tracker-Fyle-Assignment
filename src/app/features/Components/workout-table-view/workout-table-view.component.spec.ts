@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkoutTableViewComponent } from './workout-table-view.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('WorkoutTableViewComponent', () => {
   let component: WorkoutTableViewComponent;
@@ -8,7 +9,8 @@ describe('WorkoutTableViewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [WorkoutTableViewComponent]
+      imports: [WorkoutTableViewComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
     
