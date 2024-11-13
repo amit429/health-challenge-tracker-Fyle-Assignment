@@ -23,8 +23,8 @@ describe('FilterDropdownComponent', () => {
 
   it('should emit filterChange event', () => {
     jest.spyOn(component.filterChange, 'emit');
-    component.selectedWorkoutType = 'test';
+    component.selectedWorkoutType = ['test'];
     component.onFilterChange();
-    expect(component.filterChange.emit).toHaveBeenCalledWith('test');
+    expect(component.filterChange.emit).toHaveBeenCalledWith(['test']);
   });
 });

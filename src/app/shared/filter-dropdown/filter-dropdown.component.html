@@ -1,13 +1,14 @@
 <div class="relative">
     <label for="workoutFilter" class="sr-only">Workout Filter</label>
-    <p-dropdown
+    <p-multiSelect
     [style]="{border: '1px solid #3b82f6'}"
-      id="workoutFilter"
-      [options]="workoutTypes"
-      [(ngModel)]="selectedWorkoutType"
-      optionLabel="label" 
-      class="w-full h-10 sm:w-36 md:w-44 rounded-md"
-      placeholder="Select Workout Type"
-      (onChange)="onFilterChange()" 
-    ></p-dropdown>
-  </div>
+    id="workoutFilter"
+    [options]="workoutTypes"
+    [(ngModel)]="selectedWorkoutType"
+    optionLabel="label"
+    class="w-full h-10 sm:w-36 md:w-44 rounded-md"
+    placeholder="Select Workout Type"
+    (onChange)="onFilterChange()"
+    display="chip" 
+  ></p-multiSelect>
+</div>

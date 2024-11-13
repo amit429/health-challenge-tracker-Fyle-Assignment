@@ -38,11 +38,11 @@ describe('WorkoutTrackerPageComponent', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('should update workoutType and call filterAndSearchTableData on onFilterChange', () => {
+  it('should update workoutTypes and call filterAndSearchTableData on onFilterChange', () => {
     const spy = jest.spyOn(component, 'filterAndSearchTableData');
-    const workoutType = { value: 'Cardio' };
+    const workoutType = [{ label: 'Cardio', value: 'Cardio' }, { label: 'Cycling', value: 'Cycling' }];
     component.onFilterChange(workoutType);
-    expect(component.workoutType).toBe('Cardio');
+    expect(component.workoutTypes).toEqual(['Cardio', 'Cycling']);
     expect(spy).toHaveBeenCalled();
   });
 

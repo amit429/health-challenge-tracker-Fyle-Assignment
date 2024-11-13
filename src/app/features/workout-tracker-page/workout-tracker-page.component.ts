@@ -23,6 +23,7 @@ import { WorkoutUserDialogViewComponent } from '../Components/workout-user-dialo
 export class WorkoutTrackerPageComponent implements OnInit {
   searchValue: string = '';
   workoutType: string = '';
+  workoutTypes: string[] = [];
   tableData: TableData[] = [];
   userWorkoutData: User | null = null;
   userDataDialogDisplay: boolean = false;
@@ -34,7 +35,8 @@ export class WorkoutTrackerPageComponent implements OnInit {
   }
 
   onFilterChange(workoutType: any) {
-    this.workoutType = workoutType.value;
+    this.workoutTypes = workoutType.map((workout : any) => workout.value);
+    console.log('Workout Types:', this.workoutTypes);
     this.filterAndSearchTableData();
   }
 
@@ -52,10 +54,12 @@ export class WorkoutTrackerPageComponent implements OnInit {
     this.tableData = users
       .filter(
         (user) =>
-          (!this.workoutType ||
+          // Check if there is no filter or if the user's workouts include any of the selected workout types
+          (!this.workoutTypes || this.workoutTypes.length === 0 || 
             user.workouts.some(
-              (workout) => workout.type === this.workoutType
+              (workout) => this.workoutTypes.includes(workout.type)
             )) &&
+          // Check if the user's name matches the search query
           (!this.searchValue ||
             user.name.toLowerCase().includes(this.searchValue.toLowerCase()))
       )
@@ -75,6 +79,8 @@ export class WorkoutTrackerPageComponent implements OnInit {
         };
       });
   }
+  
+  
 
   onWorkoutSubmit(data: { name: string; workout: Workout }) {
     this.workoutService.addorUpdateUser(data.name, data.workout);
