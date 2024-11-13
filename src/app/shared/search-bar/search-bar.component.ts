@@ -27,6 +27,6 @@ export class SearchBarComponent implements OnInit{
   }
   
   ngOnInit() {
-    this.formControl.valueChanges.pipe(debounceTime(300)).subscribe((value:string) =>{this.searchChange.emit(value)});
+    this.formControl.valueChanges.pipe(debounceTime(300)).subscribe((value:string) =>{});
   }
 }
