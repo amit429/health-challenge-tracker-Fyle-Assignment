@@ -12,5 +12,8 @@ export const routes: Routes = [
     },
     {
         path: 'workout-dashboard' , component: WorkoutDashboardPageComponent
+    },
+    {
+        path: '**', redirectTo: ''
     }
 ];
