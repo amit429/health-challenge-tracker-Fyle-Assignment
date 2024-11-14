@@ -2,26 +2,20 @@
 
 This project is a Health Challenge Tracker application built with Angular. The application allows users to track their workouts, view individual user information, and visualize user data through various features. The project aims to provide a comprehensive solution for managing and analyzing workout data.
 
-## Features
-
-- Users can add new workout entries for themselves or others. Each entry includes the type of workout and the duration in minutes.
-
-- Clicking on a user row in the table opens a dialog displaying detailed information about the user's workouts, including the total minutes spent on each type of workout.
-
-- The application displays a table of users with their workout details, including the types of workouts, the number of workouts, and the total minutes spent.
-
-- A bar graph is generated to visualize the workout data for each user, providing a clear overview of their workout activities.
-
-- The application can load mock data to simulate user workout entries, allowing for testing and demonstration purposes.
-
-- Search functionality is available to search users by name, allowing users to quickly find specific users.
-
-- Filter functionality is available to filter users by workout type, allowing users to view users who have performed a specific type of workout.
-
 ## Submission
 ### Deployment Link : [Health Challenge Tracker](https://fyle-health-challenge-tracker-app.netlify.app/)
 
 ### GitHub Repository : [Health Challenge Tracker Repository](https://github.com/amit429/health-challenge-tracker-Fyle-Assignment)
+
+## Features
+- **Adding User**: Users can add new workout entries, including the type of workout and the duration in minutes.
+- **User Info Dialog**: Clicking on a user row opens a dialog with detailed workout information.
+- **User Data Table**: Displays a table of users with workout details, including types, number, and total minutes of workouts.
+- **Bar Graph Visualization**: Generates a bar graph to visualize workout data for each user.
+- **Mock Data Loading**: Loads mock data to simulate user workout entries for testing and demonstration.
+- **Search Functionality**: Allows users to search for specific users by name.
+- **Filter Functionality**: Filters users by workout type to view specific workout activities.
+
 
 ### Code Coverage Screen Shots:
 ![alt text](image.png)
