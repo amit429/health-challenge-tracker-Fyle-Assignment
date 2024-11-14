@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { WorkoutService } from './workout.service';
 import { LocalStorageService } from './local-storage.service';
 import { User, Workout, TableData } from '../models/user.model';
+import mockData from '../../mock-data/user-mock-data.json';
 
 describe('WorkoutService', () => {
   let service: WorkoutService;
@@ -29,8 +30,8 @@ describe('WorkoutService', () => {
 
   beforeEach(() => {
     localStorageServiceMock = {
-      getItem: jest.fn().mockImplementation(<T>(key: string): T | null => null),
-      setItem: jest.fn().mockImplementation(<T>(key: string, value: T): void => {}),
+      getItem: jest.fn(),
+      setItem: jest.fn()
     };
 
     TestBed.configureTestingModule({
@@ -192,5 +193,49 @@ describe('WorkoutService', () => {
       
       expect(result).toEqual([]);
     });
+  });
+
+  it('should load mock data and return table data when no users exist', () => {
+    localStorageServiceMock.getItem.mockReturnValue([]);
+
+    const expectedTableData: TableData[] = mockData.map(user => ({
+      name: user.name,
+      workouts: Array.from(new Set(user.workouts.map(workout => workout.type))).join(', '),
+      numberOfWorkouts: Array.from(new Set(user.workouts.map(workout => workout.type))).length,
+      totalMinutes: user.workouts.reduce((acc, workout) => acc + workout.minutes, 0)
+    }));
+
+    console.log('expectedTableData', expectedTableData);
+
+    const result = service.loadMockData();
+
+    expect(localStorageServiceMock.setItem).toHaveBeenCalledWith('userData', mockData);
+    expect(result).toEqual(expectedTableData);
+  });
+
+  it('should load mock data and return table data when users already exist', () => {
+    const existingUsers: User[] = [
+      {
+        id: 1,
+        name: 'Existing User',
+        workouts: [
+          { type: 'Cardio', minutes: 30 }
+        ]
+      }
+    ];
+    localStorageServiceMock.getItem.mockReturnValue(existingUsers);
+
+    const combinedUsers = [...existingUsers, ...mockData];
+    const expectedTableData: TableData[] = combinedUsers.map(user => ({
+      name: user.name,
+      workouts: Array.from(new Set(user.workouts.map(workout => workout.type))).join(', '),
+      numberOfWorkouts: Array.from(new Set(user.workouts.map(workout => workout.type))).length,
+      totalMinutes: user.workouts.reduce((acc, workout) => acc + workout.minutes, 0)
+    }));
+
+    const result = service.loadMockData();
+
+    expect(localStorageServiceMock.setItem).toHaveBeenCalledWith('userData', combinedUsers);
+    expect(result).toEqual(expectedTableData);
   });
 });

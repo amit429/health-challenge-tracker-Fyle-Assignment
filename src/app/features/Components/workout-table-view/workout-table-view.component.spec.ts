@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WorkoutTableViewComponent } from './workout-table-view.component';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, SimpleChange, SimpleChanges } from '@angular/core';
 import { Table } from 'primeng/table';
 import { TableData } from '../../../core/models/user.model';
 
@@ -23,6 +23,22 @@ describe('WorkoutTableViewComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should update tableText when tableData changes', () => {
+    const tableData: TableData[] = [
+      { name: 'John', workouts: 'Cardio, Strength', numberOfWorkouts: 2, totalMinutes: 75 },
+      { name: 'Jane', workouts: 'Cardio, Yoga', numberOfWorkouts: 2, totalMinutes: 80 }
+    ];
+
+    const changes: SimpleChanges = {
+      tableData: new SimpleChange(null, tableData, false)
+    };
+    component.tableData = tableData;
+
+    component.ngOnChanges(changes);
+
+    expect(component.tableText).toBe('Click on the User Row to see details');
   });
 
   it('should emit selectedUser event', () => {

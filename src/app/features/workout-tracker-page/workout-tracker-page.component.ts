@@ -21,6 +21,7 @@ import { WorkoutUserDialogViewComponent } from '../Components/workout-user-dialo
   styleUrl: './workout-tracker-page.component.css',
 })
 export class WorkoutTrackerPageComponent implements OnInit {
+
   searchValue: string = '';
   workoutType: string = '';
   workoutTypes: string[] = [];
@@ -89,6 +90,10 @@ export class WorkoutTrackerPageComponent implements OnInit {
 
   getTableData() {
     this.tableData = this.workoutService.getUsersForTable();
+  }
+
+  loadMockData() {
+    this.tableData = this.workoutService.loadMockData();
   }
 
   onRowSelect(data: TableData) {

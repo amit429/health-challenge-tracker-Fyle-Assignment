@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
 import { User , Workout, TableData } from '../models/user.model';
+import mockData from '../../mock-data/user-mock-data.json';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +45,7 @@ export class WorkoutService {
 
   //Fetch users for the table
   getUsersForTable(): TableData[] {
-    const users = this.getUsers();
+      const users = this.getUsers();
     return users.map(user => {
       return {
         name: user.name,
@@ -53,5 +54,12 @@ export class WorkoutService {
         totalMinutes: user.workouts.reduce((acc, workout) => acc + workout.minutes, 0)
       };
     });
+  }
+
+  loadMockData() : TableData[] {
+    const users = this.getUsers();
+    users.push(...mockData);
+    this.saveUsers(users);
+    return this.getUsersForTable();
   }
 }

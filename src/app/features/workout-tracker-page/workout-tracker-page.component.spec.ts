@@ -13,7 +13,8 @@ describe('WorkoutTrackerPageComponent', () => {
     const workoutServiceSpy = {
       getUsers: jest.fn().mockReturnValue([]),
       getUsersForTable: jest.fn().mockReturnValue([]),
-      addorUpdateUser: jest.fn()
+      addorUpdateUser: jest.fn(),
+      loadMockData: jest.fn().mockReturnValue([])
     };
 
     await TestBed.configureTestingModule({
@@ -181,6 +182,19 @@ describe('WorkoutTrackerPageComponent', () => {
     component.onRowSelect(data);
 
     expect(component.userWorkoutData).toBeNull();
+  });
+
+  it('should call loadMockData and set tableData on loadMockData', () => {
+    const mockTableData: TableData[] = [
+      { name: 'John', workouts: 'Cardio, Strength', numberOfWorkouts: 2, totalMinutes: 75 },
+      { name: 'Jane', workouts: 'Cardio, Yoga', numberOfWorkouts: 2, totalMinutes: 80 }
+    ];
+    workoutService.loadMockData.mockReturnValue(mockTableData);
+
+    component.loadMockData();
+
+    expect(workoutService.loadMockData).toHaveBeenCalled();
+    expect(component.tableData).toEqual(mockTableData);
   });
 
 });
