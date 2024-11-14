@@ -1,5 +1,16 @@
-<h2 class="text-4xl text-nowrap text-center font-semibold mb-4 mt-5">Track your Progress Today!!</h2>
-<div class="flex justify-center items-center mb-4 space-x-4 p-5">
+<!-- Header Banner Section -->
+<div class="relative  text-gray-700 py-16 px-6  mt- mb-3 overflow-hidden">
+    <!-- Decorative Background Shapes (optional for visual interest) -->
+    <div class="absolute inset-0 bg-opacity-25 bg-cover" style="background-image: url('path-to-background-image.jpg');"></div>
+    <div class="relative z-10 max-w-4xl mx-auto text-center space-y-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+            Elevate Your Fitness Journey
+        </h1>
+    </div>
+</div>
+
+<!-- Main Content Section with Search, Filter, and Actions -->
+<div class="flex justify-center items-center mb-8 space-x-6 p-6">
     <app-search-bar 
         [placeholder]="'Search for a user...'"
         (searchSubmit)="onSearch($event)"
@@ -15,6 +26,7 @@
     ></app-workout-dialog-form>
 </div>
 
+<!-- Table and Dialog Views for User Data and Workout Details -->
 <app-workout-table-view
     [tableData]="tableData"
     (selectedUser)="onRowSelect($event)"
